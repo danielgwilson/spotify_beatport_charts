@@ -16,9 +16,12 @@ tracks = soup.find_all('li', class_ = 'bucket-item ec-item track')
 track_data = {}
 for element in tracks:
     track_data[element.find(class_ = 'buk-track-num').get_text()] = {}
-    track_data[element.find(class_ = 'buk-track-num').get_text()]['num'] = element.find(class_ = 'buk-track-num').get_text()
-    track_data[element.find(class_ = 'buk-track-num').get_text()]['title'] = element.find(class_ = 'buk-track-primary-title').get_text()
-    track_data[element.find(class_ = 'buk-track-num').get_text()]['artists'] = element.find(class_ = 'buk-track-artists').get_text(strip = True)
+    track_data[element.find(class_ = 'buk-track-num').get_text()]['num'] =
+        element.find(class_ = 'buk-track-num').get_text()
+    track_data[element.find(class_ = 'buk-track-num').get_text()]['title'] =
+        element.find(class_ = 'buk-track-primary-title').get_text()
+    track_data[element.find(class_ = 'buk-track-num').get_text()]['artists'] =
+        element.find(class_ = 'buk-track-artists').get_text(strip = True)
 
 #--------------
 # Spotify Stuff
@@ -45,7 +48,11 @@ if token:
     sp.trace = False
     for i in range(1, len(track_data.keys()) + 1):
         item = str(i)
-        query = spotify.search(q = 'track:' + track_data[item]['title'] + ' ' + 'artist:' + track_data[item]['artists'], type = 'track')
+        query = spotify.search(
+            q = 'track:' + track_data[item]['title'] + ' ' +
+                'artist:' + track_data[item]['artists'],
+            type = 'track'
+            )
         print query
         items = query['tracks']['items']
         if len(items) > 0:
